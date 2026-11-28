@@ -1,0 +1,27 @@
+from fastmcp import FastMCP
+
+
+mcp = FastMCP("Weather Server")
+
+@mcp.tool()
+
+def get_weather(city : str):
+
+    """Return the weather information of the city."""
+    weather_data = { "Delhi": "Sunny, 32°C",
+    "Paris": "Cloudy, 9°C",
+    "Sydney": "Rainy, 29°C",
+    "London": "Partly cloudy, 15°C"
+    }
+
+    return weather_data.get(city, "Weather data not available.")
+
+
+if __name__ == "__main__":
+    print("Starting Weather MCP server..")
+    mcp.run(
+        transport = "http",
+        host = "127.0.0.1",
+        port =  8000
+    )
+    print("Starting MCP server started..")
